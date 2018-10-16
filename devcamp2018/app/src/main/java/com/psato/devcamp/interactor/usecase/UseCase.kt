@@ -34,7 +34,7 @@ import kotlin.coroutines.experimental.CoroutineContext
 abstract class UseCase<T> {
 
     protected var parentJob: Job = Job()
-    var backgroundContext: CoroutineContext = IO
+    var backgroundContext: CoroutineContext = IO //CommonPool
     var foregroundContext: CoroutineContext = UI
 
 
