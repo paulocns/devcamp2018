@@ -48,15 +48,19 @@ constructor(private val searchShows: SearchShows) : ViewModel() {
         searchShows.unsubscribe()
         searchShows.query = query.value
         val start = Date()
-        searchShows.execute({ list: List<ShowResponse> ->
-            val end = Date()
-            Log.e("SATO", "SATO - Time: " + (end.time - start.time) / 1000 + "s")
-            showLoading.value = false
-            result.value = list[0].name
-        }, { throwable ->
-            showLoading.value = false
-            result.value = throwable.message
-        })
+        searchShows.execute {
+            onComplete { list: List<ShowResponse> ->
+                val end = Date()
+                Log.e("SATO", "SATO - Time: " + (end.time - start.time) / 1000 + "s")
+                showLoading.value = false
+                result.value = list[0].name
+            }
+
+            onError { throwable ->
+                showLoading.value = false
+                result.value = throwable.message
+            }
+        }
     }
 
 }
