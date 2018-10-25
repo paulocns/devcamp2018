@@ -1,18 +1,16 @@
 package com.psato.devcamp.presentation.home
 
 import android.arch.lifecycle.ViewModel
-import android.content.Intent
 import android.view.View
-import com.psato.devcamp.infrastructure.LiveEvent
-
+import com.psato.devcamp.infrastructure.SingleLiveEvent
 import javax.inject.Inject
 
 class HomeFragmentViewModel @Inject
 constructor() : ViewModel() {
 
-    val startSearch = LiveEvent<Boolean>()
+    val startSearch = SingleLiveEvent<Any>()
 
     fun onMVVMClicked(view: View) {
-        startSearch.value =  true
+        startSearch.call()
     }
 }

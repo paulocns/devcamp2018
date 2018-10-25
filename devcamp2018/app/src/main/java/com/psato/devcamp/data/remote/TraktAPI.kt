@@ -16,7 +16,7 @@ interface TraktAPI {
     @Headers(APIConstants.HEADER_API_VERSION + ": 2",
             APIConstants.HEADER_CLIENT_ID + ": " + APIConstants.CLIENT_ID)
     @GET("search/show")
-    fun searchForShows(@Query("queryValue") query: String, @Query("limit") limit: Int): Call<List<ShowInfo>>
+    fun searchForShows(@Query("query") query: String, @Query("limit") limit: Int): Call<List<ShowInfo>>
 
     @Headers(APIConstants.HEADER_API_VERSION + ": 2",
             APIConstants.HEADER_CLIENT_ID + ": " + APIConstants.CLIENT_ID)

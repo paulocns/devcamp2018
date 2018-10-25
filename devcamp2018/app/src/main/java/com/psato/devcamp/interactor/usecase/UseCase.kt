@@ -54,6 +54,7 @@ abstract class UseCase<T> {
                 Log.d("UseCase", "canceled by user")
                 response(cancellationException)
             } catch (e: Exception) {
+                Log.e("UseCase", "exception", e)
                 response(e)
             }
         }
@@ -71,7 +72,6 @@ abstract class UseCase<T> {
             cancel()
         }
     }
-
 
 
     class Request<T> {
