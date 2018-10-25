@@ -14,19 +14,16 @@ class SearchShows @Inject
 constructor(private val showRepository: ShowRepository) :
         UseCase<List<ShowResponse>>() {
 
-    var query: String? = null
+    lateinit var query: String
 
     override suspend fun executeOnBackground(): List<ShowResponse> {
-        query?.let { query ->
-            return showRepository.searchShow(query).map {
-                background {
-                    val rating: Rating = showRepository.showRating(it.show!!.ids!!.trakt!!)
-                    ShowResponse(it.show.title!!, rating.rating)
-                }
-            }.map {
-                it.await()
+        return showRepository.searchShow(query).map {
+            background {
+                val rating: Rating = showRepository.showRating(it.show!!.ids!!.trakt!!)
+                ShowResponse(it.show.title!!, rating.rating)
             }
+        }.map {
+            it.await()
         }
-        return arrayListOf()
     }
 }
