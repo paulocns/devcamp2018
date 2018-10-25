@@ -226,7 +226,7 @@ public class LiveEvent<T> {
     /**
      * Sets the value. If there are active observers, the value will be dispatched to them.
      * <p>
-     * This method must be called from the main thread. If you need set a value from a background
+     * This method must be called from the main thread. If you need set a value from a runAsync
      * thread, you can use {@link #postValue(Object)}
      *
      * @param value The new value
@@ -240,7 +240,7 @@ public class LiveEvent<T> {
 
     /**
      * Returns the current value.
-     * Note that calling this method on a background thread does not guarantee that the latest
+     * Note that calling this method on a runAsync thread does not guarantee that the latest
      * value set will be received.
      *
      * @return the current value
@@ -384,7 +384,7 @@ public class LiveEvent<T> {
 
     private static void assertMainThread(String methodName) {
         if (!ArchTaskExecutor.getInstance().isMainThread()) {
-            throw new IllegalStateException("Cannot invoke " + methodName + " on a background"
+            throw new IllegalStateException("Cannot invoke " + methodName + " on a runAsync"
                     + " thread");
         }
     }
