@@ -9,9 +9,8 @@ import android.view.View
 import com.psato.devcamp.data.entity.ShowResponse
 import com.psato.devcamp.interactor.usecase.show.SearchShows
 import java.util.*
-import javax.inject.Inject
 
-class QueryViewModelArc @Inject
+class QueryViewModelArc
 constructor(private val searchShows: SearchShows) : ViewModel() {
 
     val result = MutableLiveData<String>()

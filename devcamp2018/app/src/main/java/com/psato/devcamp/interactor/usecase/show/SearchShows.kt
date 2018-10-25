@@ -4,13 +4,12 @@ import com.psato.devcamp.data.entity.Rating
 import com.psato.devcamp.data.entity.ShowResponse
 import com.psato.devcamp.data.repository.show.ShowRepository
 import com.psato.devcamp.interactor.usecase.UseCase
-import javax.inject.Inject
 
 /**
  * Created by psato on 29/10/16.
  */
 
-class SearchShows @Inject
+class SearchShows
 constructor(private val showRepository: ShowRepository) :
         UseCase<List<ShowResponse>>() {
 

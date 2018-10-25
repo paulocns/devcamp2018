@@ -18,49 +18,24 @@
  */
 package com.psato.devcamp.di.module
 
+import android.content.Context
 import com.psato.devcamp.data.remote.APIConstants
-import com.psato.devcamp.di.component.ViewModelSubComponent
-import com.psato.devcamp.infrastructure.DevCampApplication
-import com.psato.devcamp.infrastructure.ProjectViewModelFactory
-import dagger.Module
-import dagger.Provides
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
+import org.koin.dsl.module.module
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import javax.inject.Singleton
 
-/**
- * Dagger module that provides objects which will live during the application lifecycle.
- */
-@Module(subcomponents = arrayOf(ViewModelSubComponent::class))
-class ApplicationModule(private val application: DevCampApplication) {
-
-    @Provides
-    @Singleton
-    internal fun provideApplication(): DevCampApplication {
-        return application
-    }
-
-    @Provides
-    @Singleton
-    internal fun provideRetrofit(): Retrofit {
+val appModule = module {
+    // single instance of HelloRepository
+    single<Retrofit> {
         val interceptor = HttpLoggingInterceptor()
         interceptor.level = HttpLoggingInterceptor.Level.BODY
         val client = OkHttpClient.Builder().addInterceptor(interceptor).build()
-
-        return Retrofit.Builder()
+        Retrofit.Builder()
                 .client(client)
                 .addConverterFactory(GsonConverterFactory.create())
                 .baseUrl(APIConstants.BASE_URL)
                 .build()
-    }
-
-    @Singleton
-    @Provides
-    internal fun provideViewModelFactory(
-            viewModelSubComponent: ViewModelSubComponent.Builder): ProjectViewModelFactory {
-
-        return ProjectViewModelFactory(viewModelSubComponent.build())
     }
 }

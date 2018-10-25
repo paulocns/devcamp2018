@@ -13,9 +13,11 @@ import com.psato.devcamp.infrastructure.bindView
 import com.psato.devcamp.infrastructure.onClick
 import com.psato.devcamp.presentation.base.BaseFragment
 import com.psato.devcamp.presentation.search.QueryActivity
+import org.koin.android.viewmodel.ext.android.viewModel
 
 class HomeFragment : BaseFragment() {
-    private lateinit var homeFragmentViewModel: HomeFragmentViewModel
+
+    val homeFragmentViewModel: HomeFragmentViewModel by viewModel()
     val mvvmButton: Button by bindView(R.id.mvvm_button)
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -26,7 +28,6 @@ class HomeFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        homeFragmentViewModel = ViewModelProviders.of(this, viewModelFactory).get(HomeFragmentViewModel::class.java)
         mvvmButton.onClick {
             homeFragmentViewModel.onMVVMClicked(it)
         }

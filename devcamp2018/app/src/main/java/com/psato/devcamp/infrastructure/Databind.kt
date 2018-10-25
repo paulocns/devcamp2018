@@ -1,5 +1,6 @@
 package com.psato.devcamp.infrastructure
 
+import android.arch.lifecycle.LifecycleOwner
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.Observer
@@ -10,8 +11,8 @@ import android.view.View
 import android.widget.EditText
 import android.widget.TextView
 
-fun View.visibility(visibility: LiveData<Boolean>) {
-    visibility.observe(context as AppCompatActivity, Observer {
+fun View.visibility(visibility: LiveData<Boolean>, owner: LifecycleOwner = context as AppCompatActivity) {
+    visibility.observe(owner, Observer {
         it?.let {
             if (it) {
                 this.visibility = View.VISIBLE
@@ -22,8 +23,8 @@ fun View.visibility(visibility: LiveData<Boolean>) {
     })
 }
 
-fun View.enabled(enabled: LiveData<Boolean>) {
-    enabled.observe(context as AppCompatActivity, Observer {
+fun View.enabled(enabled: LiveData<Boolean>, owner: LifecycleOwner = context as AppCompatActivity) {
+    enabled.observe(owner, Observer {
         it?.let {
             this.isEnabled = it
         }
@@ -36,16 +37,16 @@ fun View.onClick(block: (View) -> Unit) {
     }
 }
 
-fun TextView.text(text: LiveData<String>) {
-    text.observe(context as AppCompatActivity, Observer {
+fun TextView.text(text: LiveData<String>, owner: LifecycleOwner = context as AppCompatActivity) {
+    text.observe(owner, Observer {
         it?.let {
             this.text = it
         }
     })
 }
 
-fun EditText.text(text: MutableLiveData<String>) {
-    text.observe(context as AppCompatActivity, Observer {
+fun EditText.text(text: MutableLiveData<String>, owner: LifecycleOwner = context as AppCompatActivity) {
+    text.observe(owner, Observer {
         it?.let {
             if (it != (getText().toString()))
                 this.setText(it)
