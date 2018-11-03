@@ -48,6 +48,7 @@ constructor(private val searchShows: SearchShows) : ViewModel() {
         queryValue.value?.let {
             searchShows.query = it
             searchShows.execute {
+
                 onComplete { list: List<ShowResponse> ->
                     val end = Date()
                     Log.e("SATO", "SATO - Time: " + (end.time - start.time) / 1000 + "s")
