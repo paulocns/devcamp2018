@@ -10,7 +10,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import com.psato.devcamp.R
 import com.psato.devcamp.infrastructure.bindView
-import com.psato.devcamp.infrastructure.onClick
+import com.psato.devcamp.infrastructure.databind.onClick
 import com.psato.devcamp.presentation.base.BaseFragment
 import com.psato.devcamp.presentation.search.QueryActivity
 import org.koin.android.viewmodel.ext.android.viewModel
@@ -28,9 +28,7 @@ class HomeFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        mvvmButton.onClick {
-            homeFragmentViewModel.onMVVMClicked(it)
-        }
+        mvvmButton.onClick(homeFragmentViewModel::onMVVMClicked)
         homeFragmentViewModel.startSearch.observe(this, Observer {
             startActivity(Intent(activity, QueryActivity::class.java))
         })
