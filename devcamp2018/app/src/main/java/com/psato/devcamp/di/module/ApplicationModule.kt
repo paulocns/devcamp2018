@@ -19,6 +19,7 @@
 package com.psato.devcamp.di.module
 
 import android.content.Context
+import android.util.Log
 import com.psato.devcamp.data.remote.APIConstants
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -29,6 +30,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 val appModule = module {
     // single instance of HelloRepository
     single<Retrofit> {
+        Log.e("SATO", "retrofit created")
         val interceptor = HttpLoggingInterceptor()
         interceptor.level = HttpLoggingInterceptor.Level.BODY
         val client = OkHttpClient.Builder().addInterceptor(interceptor).build()
