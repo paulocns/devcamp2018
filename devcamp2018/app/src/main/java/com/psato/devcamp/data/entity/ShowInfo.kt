@@ -13,5 +13,5 @@ class ShowInfo {
     @SerializedName("score")
     val score: String? = null
     @SerializedName("show")
-    val show: Show? = null
+    var show: Show? = null
 }

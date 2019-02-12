@@ -9,17 +9,17 @@ import com.psato.devcamp.interactor.usecase.UseCase
  * Created by psato on 29/10/16.
  */
 
-class SearchShows
+open class SearchShows
 constructor(private val showRepository: ShowRepository) :
         UseCase<List<ShowResponse>>() {
 
     lateinit var query: String
 
-    override suspend fun executeOnBackground(): List<ShowResponse> {
+    public override suspend fun executeOnBackground(): List<ShowResponse> {
         return showRepository.searchShow(query).map {
             runAsync {
                 val rating: Rating = showRepository.showRating(it.show!!.ids!!.trakt!!)
-                ShowResponse(it.show.title!!, rating.rating)
+                ShowResponse(it.show!!.title!!, rating.rating)
             }
         }.map {
             it.await()

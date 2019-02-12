@@ -43,6 +43,7 @@ dependencies {
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.0.0"
     implementation 'org.koin:koin-android:1.0.1'
     implementation 'org.koin:koin-android-viewmodel:1.0.1'
+    testImplementation "org.mockito:mockito-core:2.24.0"
 
 }
 repositories {

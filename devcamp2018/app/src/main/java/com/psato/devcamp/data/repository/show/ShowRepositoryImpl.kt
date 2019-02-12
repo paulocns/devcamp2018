@@ -10,12 +10,12 @@ import java.io.IOException
  */
 
 class ShowRepositoryImpl(private val traktAPI: TraktAPI) : ShowRepository {
-    override fun showRating(id: String): Rating {
+    override suspend fun showRating(id: String): Rating {
         return traktAPI.getShowRating(id).execute().body()!!
     }
 
     @Throws(IOException::class)
-    override fun searchShow(query: String): List<ShowInfo> {
+    override suspend fun searchShow(query: String): List<ShowInfo> {
         return traktAPI.searchForShows(query, 200).execute().body()!!
     }
 }

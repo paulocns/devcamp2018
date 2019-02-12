@@ -8,7 +8,7 @@ import com.google.gson.annotations.SerializedName
 
 class ShowIds {
     @SerializedName("trakt")
-    val trakt: String? = null
+    var trakt: String? = null
     @SerializedName("slug")
     val slug: String? = null
     @SerializedName("tvdb")
